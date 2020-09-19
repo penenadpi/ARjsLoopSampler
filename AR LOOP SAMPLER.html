@@ -1,0 +1,76 @@
+<!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
+<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+<script>
+
+
+AFRAME.registerComponent('soundhandler', {
+    tick: function () {
+ var m1 = document.querySelector('#sound1');
+ var m2 = document.querySelector('#sound2');
+  var m3 = document.querySelector('#sound3');
+ //m1.loop=true;
+ //m2.loop=true;
+         if (document.querySelector('#marker1').object3D.visible == true) {
+		   m1.play();
+        } else {
+            m1.pause();
+        }
+		
+		
+		 if (document.querySelector('#marker2').object3D.visible == true) {
+            m2.play();
+        } else {
+            m2.pause();
+        }
+		 if (document.querySelector('#marker3').object3D.visible == true) {
+            m3.play();
+        } else {
+            m3.pause();
+        }
+
+     }
+});
+
+
+</script>
+
+
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+	
+	<a-assets>
+            <audio id="sound1" src="RELAY1.wav" preload="auto"></audio>
+			<audio id="sound2" src="RELAY2.wav" preload="auto"></audio>
+			<audio id="sound3" src="RELAY3.wav" preload="auto"></audio>
+    </a-assets>
+	
+	
+	<a-marker id='marker1' type='barcode' value='1'  cursor='rayOrigin: mouse'>
+			<a-box id='m1' position='0 0.5 0'  material='opacity: 0.5; color:red;' soundhandler>
+			</a-box>
+		</a-marker>
+	
+	<a-marker id='marker2' type='barcode'  value='2' cursor='rayOrigin: mouse'>
+			<a-box id='m2' position='0 0.5 0' material='opacity: 0.5; color:green;' soundhandler>
+			</a-box>
+	</a-marker>
+	
+	
+		
+	<a-marker id='marker3' type='barcode'  value='3' cursor='rayOrigin: mouse'>
+			<a-box id='m3' position='0 0.5 0' material='opacity: 0.5; color:blue;' soundhandler>
+			</a-box>
+	</a-marker>
+	
+     <!--
+		<a-marker-camera preset='hiro' cursor='rayOrigin: mouse'>
+		<a-box id='animated-marker'  markerhandler emitevents="true" cursor-listener position='0 0.5 0' material='opacity: 0.5;'> <a-text value="LOOP1"-90 0 0" color="red"></a-text></a-box>	
+		</a-marker-camera>
+		
+		<a-marker-camera preset='kanji' cursor='rayOrigin: mouse'>
+		<a-box id='animated-marker2'  markerhandler emitevents="true" cursor-listener position='0 0.5 0' material='opacity: 0.5;'> <a-text value="LOOP2" rotation="-90 0 0" color="red"></a-text></a-box>
+		</a-marker-camera>
+		-->
+	</a-scene>
+</body>
